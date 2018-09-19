@@ -16,7 +16,7 @@ var Connector = /** @class */ (function () {
             "padding": "0%"
         });
         //	Create the banner with default structure
-        // this.initPlugin();
+        this.initPlugin();
         this.loadDeafultCss();
     };
     Connector.prototype.setCss = function (elem, styles) {
@@ -46,7 +46,7 @@ var Connector = /** @class */ (function () {
         document.getElementsByTagName("body")[0].innerHTML += Connector.getDefaultContent();
     };
     Connector.getDefaultContent = function () {
-        return "\n\t\t\t<div id=\"connector-wrapper\" style=\"position: fixed; bottom: 0vh; width: 100vw; background-color: #272440; min-height: 10%; display: flex;align-items: center;box-shadow: 6px 6px 8px rgba(0,0,0,0.3); margin: auto;\">\n\t\t\t</div>\n\t\t";
+        return "\n\t\t<div id=\"connector-parent\">\n\t\t\t<div id=\"connector-wrapper\">\n\t\t\t\t<div id=\"indicator-icon\">\n\t\t\t\t\t<div>\n\t\t\t\t\t\t<img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAl9JREFUeNrsWYtRwzAMbbkOEDboBoQJCBuUDcIG3YBsYDYwG2QEwwRmg3SDdANjH8pdyNmS8jFNwe/Ol7SNbUl+erLTzSYhISEhYSEYY/K/4ERpvnG8ZicK8xOS6rONSInMO+F2+87oqzz9H7G+u5kGu8kK29zkD3DNiD7drTPqZNuHu7dGnmA86RnjmQrAJOMdb21TZlk00MxYWk3hrTS/C8W1b8dxwF5egEJcnG379HyfAf242Dv1srR6m0shyaSEBLnMmWM7Aw+2VQE6+eYopmp4iwzsfhNzC5brT8wzhABBYK1CTUSmXFA0tGeOI8GEBg0gREfHdqA3n8IUCuiHKWM5dokrznLCxCU8r3rNQIC6zyKw6iow7gGx7Tg0oJ2SYNBXMBOWSuZsIuWr/oNDTmpi4CJCQdQUfSF/cDt7zkhiBerIRVBjTOjtisPBxiLCkORucAHPFtD2BM+DUovYcmDJ8MjC2MCS75ExfGrYFVFFBCaLqfVsSQ4EQY3IuXb2SRGWEFeKccmJRhmhr1jyyNlFp5gRBDK6kFM6yjYenNFYHvSMl0RiK1gpTt1Y9izCdHRKURSLJPNCYjC3MLLpGu2dE7M2NOAs9eysTelNZH/dKfHenvDcG5Bbd2/bK5wgh7hb66q0IXHwFFm5hjwpA47kzL5iLcnehPgOK1aBwZdXp5F7KBE4Ac7fakRywreHquG3KqRga3MC3UMRtSVKzbiZ4MTBXoTnhdyTldjz1fzxEpDbnEG7Lk9WsSVRnIpMqdla5FYzj6P9t/byovspQrHqTUJCQkLCf8eXAAMAs31cAB7jS2kAAAAASUVORK5CYII=\" id=\"network-logo\">\n\t\t\t\t\t\t<!-- <div id=\"loading\"></div> -->\n\t\t\t\t\t</div>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"notification-wrapper\">\n\t\t\t\t\t<h5>No internet connection!<br><span>Retrying in 39 seconds</span></h5>\n\t\t\t\t</div>\n\t\t\t\t<div id=\"button-wrapper\">\n\t\t\t\t\t<button type=\"button\" id=\"retry-btn\">\n\t\t\t\t\t\t<!-- Retry Now  -->\n\t\t\t\t\t\t<div id=\"loading\"></div>\n\t\t\t\t\t</button>\n\t\t\t\t</div>\n\t\t\t</div>\n\t\t</div>\n\t\t";
     };
     Connector.prototype.loadDeafultCss = function () {
         document.getElementsByTagName("head")[0].innerHTML += Connector.getDefaultCss();
