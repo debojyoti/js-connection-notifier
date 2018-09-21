@@ -1,12 +1,16 @@
 
 class Connector {
 	private config;
+	private connectorElem;
 	constructor(config = null) {
 		if (config !== null) {
 			this.config = config;
 		}
 		//	DOM primary setup
 		this.configureDom();
+		this.connectorElem = document.getElementById("connector-parent");
+		//	Enable network watch
+		this.watchNetworkChanges(); 
 	}
 
 	private configureDom() {
@@ -50,6 +54,25 @@ class Connector {
 
 	private initPlugin() {
 		document.getElementsByTagName("body")[0].innerHTML += Connector.getDefaultContent();
+	}
+
+	private watchNetworkChanges() {
+		window.addEventListener("offline", e => {
+			if (this.connectorElem.classList.contains('slide-up')) {
+				this.connectorElem.classList.toggle('slide-up');
+			}
+			if (!this.connectorElem.classList.contains('slide-down')) {
+				this.connectorElem.classList.toggle('slide-down');
+			}
+		});
+		window.addEventListener("online", e => {
+			if (this.connectorElem.classList.contains('slide-down')) {
+				this.connectorElem.classList.toggle('slide-down');
+			}
+			if (!this.connectorElem.classList.contains('slide-up')) {
+				this.connectorElem.classList.toggle('slide-up');
+			}
+		})
 	}
 
 	private static getDefaultContent() {
@@ -101,6 +124,16 @@ class Connector {
 					@-webkit-keyframes spin {
 					  to { -webkit-transform: rotate(360deg); }
 					}
+					.slide-up, .slide-down {
+						overflow:hidden;
+					  }
+					  .slide-up > div, .slide-down > div {
+						transform: translateY(-100%);
+						transition: .4s ease-in-out;
+					  }
+					  .slide-down > div {            
+						transform: translateY(0);
+					  } 
 					#retry-btn {
 						height:5vh;
 						width:80%;
