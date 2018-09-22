@@ -1,7 +1,9 @@
 
 class Connector {
-	private config;
-	private connectorElem;
+	private config: any;
+	private connectorElem: any;
+	private notifierEvent: any;
+
 	constructor(config = null) {
 		if (config !== null) {
 			this.config = config;
@@ -12,6 +14,30 @@ class Connector {
 		//	Enable network watch
 		this.watchNetworkChanges(); 
 	}
+
+	/*			Public methods (Starts)		 */
+	public disableNotifierUI() {
+		// Timeout to keep the animation stage propers
+		this.hide();
+		setTimeout(()=>{
+			this.connectorElem.style.display = "none";
+		},1000);
+	}
+	public enableNotifierUI() {
+		// Timeouts to keep the animation stage propers
+		this.hide();
+		setTimeout(()=>{
+			this.connectorElem.style.display = "block";
+		},100);
+		setTimeout(()=>{
+			this.show();
+		},1000);
+	}
+
+	public subscribe() {
+
+	}
+	/*			Public methods (Starts)		 */
 
 	private configureDom() {
 		//	Set body padding, margin to 0
@@ -45,7 +71,6 @@ class Connector {
 				break;
 		}
 		for (var selector of selectors) {
-        	console.log(selector);
         	for (var key in styles) {
         	    selector.style[key] = styles[key];
         	}
@@ -57,22 +82,35 @@ class Connector {
 	}
 
 	private watchNetworkChanges() {
+		if (window.navigator.onLine) {
+			this.hide();
+		} else {
+			this.show();
+		}
 		window.addEventListener("offline", e => {
-			if (this.connectorElem.classList.contains('slide-up')) {
-				this.connectorElem.classList.toggle('slide-up');
-			}
-			if (!this.connectorElem.classList.contains('slide-down')) {
-				this.connectorElem.classList.toggle('slide-down');
-			}
+			this.show();
 		});
 		window.addEventListener("online", e => {
-			if (this.connectorElem.classList.contains('slide-down')) {
-				this.connectorElem.classList.toggle('slide-down');
-			}
-			if (!this.connectorElem.classList.contains('slide-up')) {
-				this.connectorElem.classList.toggle('slide-up');
-			}
+			this.hide();
 		})
+	}
+
+	private show() {
+		if (this.connectorElem.classList.contains('slide-up')) {
+			this.connectorElem.classList.toggle('slide-up');
+		}
+		if (!this.connectorElem.classList.contains('slide-down')) {
+			this.connectorElem.classList.toggle('slide-down');
+		}
+	}
+
+	private hide() {
+		if (this.connectorElem.classList.contains('slide-down')) {
+			this.connectorElem.classList.toggle('slide-down');
+		}
+		if (!this.connectorElem.classList.contains('slide-up')) {
+			this.connectorElem.classList.toggle('slide-up');
+		}
 	}
 
 	private static getDefaultContent() {
@@ -128,7 +166,7 @@ class Connector {
 						overflow:hidden;
 					  }
 					  .slide-up > div, .slide-down > div {
-						transform: translateY(-100%);
+						transform: translateY(180%);
 						transition: .4s ease-in-out;
 					  }
 					  .slide-down > div {            
@@ -173,7 +211,7 @@ class Connector {
 						margin: 0px 24%;
 						display: flex; 
 						background-color: #F11362;
-						box-shadow: 0px -12px 25px rgba(0,0,0,0.3);
+						box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
 						padding: 0px 8%;
 						align-items: center
 					}
