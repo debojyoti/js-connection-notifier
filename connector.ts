@@ -33,19 +33,23 @@ class Connector {
 			this.show();
 		},1000);
 	}
-
 	public subscribe() {
 
+	}
+	public disableWindowActions() {
+		this.setCss({
+			"id": "window-wrapper"
+		}, {
+			"display": "inline"
+		});
 	}
 	/*			Public methods (Starts)		 */
 
 	private configureDom() {
 		//	Set body padding, margin to 0
-		this.setCss(
-			{
+		this.setCss({
 				"name":"body"
-			},
-			{
+			}, {
 				"margin":"0%",
 				"padding":"0%"
 			}
@@ -70,11 +74,17 @@ class Connector {
 				selectors = document.getElementsByClassName(identifier);
 				break;
 		}
-		for (var selector of selectors) {
-        	for (var key in styles) {
-        	    selector.style[key] = styles[key];
-        	}
-        }
+		if (selectBy === "id") {
+			for (var key in styles) {
+				selectors.style[key] = styles[key];
+			}
+		} else {
+			for (var selector of selectors) {
+				for (var key in styles) {
+					selector.style[key] = styles[key];
+				}
+			}
+		}
 	}
 
 	private initPlugin() {
@@ -115,6 +125,7 @@ class Connector {
 
 	private static getDefaultContent() {
 		return `
+		<div id="window-wrapper"></div>
 		<div id="connector-parent">
 			<div id="connector-wrapper">
 				<div id="indicator-icon">
@@ -196,7 +207,18 @@ class Connector {
 					#connector-wrapper {
 						border-left: 4px solid #403B66;
 					}
+					#window-wrapper {
+						z-index: 9999999999999999998;
+						position: fixed; 
+						bottom: 0px; 
+						left: 0px;
+						width: 100vw;
+						height: 100vh;
+						background-color: #1f1f1f85;
+						display: none;
+					}
 					#connector-parent {
+						z-index: 9999999999999999999;
 						position: fixed; 
 						bottom: 2vh; 
 						left: 0px;
