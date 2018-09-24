@@ -143,7 +143,7 @@ class Theme {
 					}
 					#indicator-icon {
 						flex: 1;
-						min-height: 5vh;
+						min-height: 35px;
 					}
 					#indicator-icon > div {
 						flex: 1;
