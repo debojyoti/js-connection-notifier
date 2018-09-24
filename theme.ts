@@ -32,10 +32,10 @@ class Theme {
                             </div>
                         </div>
                         <div id="notification-wrapper">
-                            <h5>No internet connection!<br><span>Retrying in 39 seconds</span></h5>
+                            <h5>No internet connection!<br><span>Since <span id="offDuration">3 mins</span></span></h5>
                         </div>
                         <div id="button-wrapper">
-                            <button type="button" id="retry-btn">
+                            <div  id="retrying-indicator-wrapper">
                                 <!-- Retry Now  -->
                                 <div id="loading"></div>
                             </button>
@@ -87,18 +87,14 @@ class Theme {
 					  .slide-down > div {            
 						transform: translateY(0);
 					  } 
-					#retry-btn {
-						height:5vh;
+					#retrying-indicator-wrapper {
 						width:80%;
-						background-color: #403B66;
+						background-color: #ff005d;
 						color:white;
 						border:none;
 						transition: 0.3s;
-						cursor: pointer;
-						box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
-					}
-					#retry-btn:hover {
-						box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+						text-align: center;
+						height:25px;
 					}
 					#connector-parent h5 {
 						margin: 0px!important;
@@ -158,7 +154,7 @@ class Theme {
 						color: white;
 						font-family: sans-serif;
 					}
-					#notification-wrapper h5 span{
+					#notification-wrapper h5 > span{
 						font-size: 77%
 					}
 					#button-wrapper {
@@ -173,6 +169,7 @@ class Theme {
 					@media (max-width:1024px) {
 						#connector-wrapper {
 							margin: 0% 10%;
+							padding: 0% 10%;
 						}
 					}
 
@@ -180,15 +177,16 @@ class Theme {
 					@media (max-width:767px) {
 						#connector-wrapper {
 							margin: 0% 0%;
-							padding: 0% 2%;
+							padding: 0% 4%;
 						}
 						#notification-wrapper {
 							flex: 5; 
 							min-height: 3vh;
 							padding-left: 10px;
 						} 
-						#retry-btn {
-							height:6vh;
+						#retrying-indicator-wrapper {
+							text-align: center;
+							height:25px;
 						}
 					}
 					/*	s-device landscape 	*/
@@ -196,8 +194,9 @@ class Theme {
 						#connector-wrapper {
 								min-height: 16vh;
 						}
-						#retry-btn {
-							height:10vh;
+						#retrying-indicator-wrapper {
+							text-align: center;
+							height:25px;
 						}
 						#indicator-icon {
 							min-height: 8vh;

@@ -4,8 +4,12 @@ class Connector {
 	private connectorElem: any;
 	private notifierEvent: any;
 	private currentTheme: any;
+	private offlineDuration: number;	//	In seconds
+	private timerObject: any;
+	private timerElem: any;
 
 	constructor(configParams = null) {
+		this.offlineDuration = 0;
 		if (configParams !== null) {
 			// Store external config params
 			this.config = configParams;
@@ -67,6 +71,9 @@ class Connector {
 		//	Create the banner 
 		this.initPlugin();
 		this.loadCss();
+
+		// Get timer elem
+		this.timerElem = document.getElementById("offDuration");
 	}
 
 	private setCss(elem, styles) {
@@ -109,10 +116,30 @@ class Connector {
 		}
 		window.addEventListener("offline", e => {
 			this.show();
+			this.addTimer();
 		});
 		window.addEventListener("online", e => {
 			this.hide();
+			this.clearTimer();
 		})
+	}
+
+	private addTimer() {
+		if (this.timerObject === undefined || this.timerObject === null) {
+			this.timerObject = setInterval(() => {
+				this.offlineDuration++;
+				console.log(this.offlineDuration);
+				this.timerElem.innerHTML = this.offlineDuration+" secs";
+			}, 1000);
+		}
+	}
+
+	private clearTimer() {
+		if(this.timerObject !== undefined && this.timerObject !== null) {
+			clearInterval(this.timerObject);
+			this.timerObject = null;
+			this.offlineDuration = 0;
+		}
 	}
 
 	private show() {
