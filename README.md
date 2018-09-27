@@ -16,10 +16,3 @@ A simple vanilla JS plugin to notify user about network change and can also bloc
 </script>
 
 ```
-
-#### Advanced setup
-
-```javascript
-var myConnector = new Connector();
-
-```
