@@ -4,7 +4,7 @@ A simple vanilla JS plugin to notify user about network change and can also bloc
 
 ## Usage 
 
-#### Step-1: Save the [plugin file](https://github.com/debojyoti/js-connection-notifier/blob/master/connector.js) in your preferred location
+#### Step-1: Save the [plugin file](https://raw.githubusercontent.com/debojyoti/js-connection-notifier/master/connector.js) in your preferred location
 
 #### Step-2: Basic initialization
 
